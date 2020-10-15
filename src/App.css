@@ -1,0 +1,30 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.blogContent {
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  padding: 1em;
+  background-color: lightgoldenrodyellow;
+}
+
+.postContent {
+  text-align: center;
+}
+
+.commentsSection {
+  text-align: start;
+  padding: 0 0.5em;
+  background-color: lightyellow;
+}
+
+h6 {
+  margin-top: 0;
+}
+
+span {
+  padding-right: 0.5em;
+}
