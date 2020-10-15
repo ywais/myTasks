@@ -9,14 +9,24 @@ function App() {
   const [comments, setComments] = useState([]);
   const nameRef = useRef();
   const contentRef = useRef();
+  const ButtonRef = useRef();
 
   useEffect(() => {
     nameRef.current.focus();
   }, []);
 
-  const onChange = (event) => {
+  const onChange = (event, field) => {
     if(event.keyCode === 13) {
-      contentRef.current.focus();
+      switch (field) {
+        case 'name':
+          contentRef.current.focus();
+          break;
+        case 'content':
+          ButtonRef.current.click();
+          break;
+        default:
+          break;
+      }
     }
   }
   
@@ -74,14 +84,14 @@ function App() {
         </div>
       </div>
       <div className='commentsForm'>
-        <form>
+        {/* <form> */}
           <fieldset>
             <legend>Add a comment</legend>
-            <input ref={nameRef} onKeyUp={onChange} placeholder='Name' /><br />
-            <input ref={contentRef} placeholder='Content' /><br />
-            <button onClick={handleClick}>Submit</button>
+            <input ref={nameRef} onKeyUp={(event) => onChange(event, 'name')} placeholder='Name' /><br />
+            <input ref={contentRef} onKeyUp={(event) => onChange(event, 'content')} placeholder='Content' /><br />
+            <button ref={ButtonRef} onClick={handleClick}>Submit</button>
           </fieldset>
-        </form>
+        {/* </form> */}
       </div>
     </div>
   );
