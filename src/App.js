@@ -109,9 +109,7 @@ function App() {
       <h2>Confirmed cases - last day</h2>
       <PieChart width={300} height={300}>
         <Pie data={pieData} dataKey="value" cx={150} cy={150} >
-          { pieData.map((element, index) => {
-            return <Cell key={`cell-${index}`} fill={index === 0 ? "blue" : "red"} />
-          }) }
+          { pieData.map((element, index) => <Cell key={`cell-${index}`} fill={index === 0 ? "blue" : "red"} /> ) }
         </Pie>
         <Tooltip />
       </PieChart>
