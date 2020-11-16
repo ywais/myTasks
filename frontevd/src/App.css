@@ -1,0 +1,70 @@
+.preview {
+  width: 200px;
+  margin: 1em 0.5em;
+}
+
+.preview h4, .preview p {
+  margin: 0.25em 0;
+}
+
+.preview h4.artistName {
+  text-align: center;
+}
+
+.squareImg {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.roundImg {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.full .info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.full .squareImg, .full div {
+  margin: 0.25em;
+}
+
+.songsTable {
+  font-size: 1.25em;
+}
+
+.songsTable h4 {
+  margin-bottom: 0;
+}
+
+td {
+  text-align: center;
+  background-color: lightgrey;
+  border: 1px solid white;
+  width: 33vw;
+}
+
+.split{
+  display: flex;
+  flex-direction: row;
+}
+
+.split .songsTable{
+  width: 40vw;
+}
+
+.split .songInfo{
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+}
+  
+.noSplit .songInfo{
+  display: flex;
+  flex-direction: column;
+}
