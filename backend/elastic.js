@@ -153,13 +153,36 @@ async function uploads() {
 
 uploads().catch(console.log);
 
+const searchTable = async (input, table) => {
+  const { body } = await client.search({
+    index: table,
+    size:100,
+    body: {
+      query: {
+        wildcard: {
+          name: {
+            value: `*${input}*`,
+            boost: 1.0,
+            rewrite: "constant_score"
+          },
+        }
+      }
+    }
+  });
+  return body.hits.hits.map(hit => hit._source);
+};
+
 router.get('/search',(req,res) => {
   const input = req.query.input;
   try {
-    const results = elastic.searchAll(input);
+    const tables = ['songs', 'artists', 'albums', 'playlists'];
+    const results = {
+      tables,
+      results: Promise.all(tables.map(table => searchTable(input,table)))
+    };
     results.results.then(resultsArray => {
       const resultsByTable = {};
-      results.indices.forEach((table, index) => resultsByTable[table] = resultsArray[index].slice(0, 3));
+      results.tables.forEach((table, index) => resultsByTable[table] = resultsArray[index].slice(0, 3));
       res.json(resultsByTable);
     })
   } catch(error) {
@@ -168,10 +191,8 @@ router.get('/search',(req,res) => {
 });
 
 router.get('/:table',(req,res) => {
-  const table = req.params.table;
-  const input = req.query.input;
   try {
-    elastic.search(input,table).then(results => res.json(results));
+    searchTable(req.query.input, req.params.table).then(results => res.json(results));
   } catch(error) {
     console.log(error);
   }
