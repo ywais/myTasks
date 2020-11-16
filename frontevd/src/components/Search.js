@@ -6,7 +6,7 @@ function Search(props) {
 
   useEffect(() => {
     const getSearchData = async () => {
-      const { data } = await axios.get(`http://localhost:3001/elastic/search?input=${props.input}`);
+      const { data } = await axios.get(`http://localhost:3001/elastic/search?input=${props.location.search.substring(7)}`);
       setSearchData(data);
     };
     getSearchData();
@@ -16,7 +16,34 @@ function Search(props) {
     <div className='searchContainer'>
       <div className="searchButtons">
         {Object.keys(searchData).map(table => 
-          <button key={table}>{table}</button>
+          <button
+            key={table}
+            onClick={() =>
+              window.location.href = `http://localhost:3001/elastic/${table}?input=${props.location.search.substring(7)}`
+            }
+          >
+            {table}
+          </button>
+        )}
+      </div>
+      <div className="resultsSection">
+        {Object.keys(searchData).map(table =>
+          <div key={table} className="resultsFromTable">
+            <h2>{table}</h2>
+            {searchData[table].map(result => {
+              let resultRow = "";
+              Object.values(result).forEach(value => resultRow.concat(value));
+              return resultRow;
+            })}
+            <button
+              key={table}
+              onClick={() =>
+                window.location.href = `http://localhost:3001/elastic/${table}?input=${props.location.search.substring(7)}`
+              }
+            >
+              "SHOW ALL"
+            </button>
+          </div>
         )}
       </div>
     </div>
