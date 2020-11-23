@@ -7,3 +7,5 @@
 [myCovid19Dashboard](https://github.com/ywais/myTasks/tree/myCovid19Dashboard) - lesson 43-charts
 
 [myElasticMusicStreamingService](https://github.com/ywais/myTasks/tree/myElasticMusicStreamingService) - lesson 48-elasticsearch
+
+[myFirebaseAuthSystem](https://github.com/ywais/myTasks/tree/myFirebaseAuthSystem) - lesson 51-firebase
